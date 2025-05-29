@@ -5,7 +5,7 @@ import { Heading } from './componets/Heading';
 export function App() {
   return (
     <div>
-      <Heading />
+      <Heading attr='cyan'>Hello World!</Heading>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius expedita
         explicabo quidem impedit eum ipsum in illum, debitis officia porro magni
