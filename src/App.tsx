@@ -30,7 +30,7 @@ export function App() {
           <div className='formRow'>
             <DefaultInput
               id='meuInput'
-              labelText='Task'
+              labelText='task'
               type='text'
               placeholder='Digite Algo'
             />
