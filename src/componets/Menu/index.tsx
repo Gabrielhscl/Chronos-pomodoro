@@ -1,11 +1,27 @@
-import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon } from 'lucide-react';
+import {
+  HistoryIcon,
+  HouseIcon,
+  SettingsIcon,
+  SunIcon,
+  MoonIcon,
+} from 'lucide-react';
 import styles from './styles.module.css';
 import { useState, useEffect } from 'react';
 
 type AvailaleThemes = 'dark' | 'light';
 
 export function Menu() {
-  const [theme, setTheme] = useState<AvailaleThemes>('dark');
+  const [theme, setTheme] = useState<AvailaleThemes>(() => {
+    const storageTheme =
+      (localStorage.getItem('theme') as AvailaleThemes) || 'dark';
+
+    return storageTheme;
+  });
+
+  const nextThemeIcon = {
+    dark: <SunIcon aria-hidden='true' focusable='false' />,
+    light: <MoonIcon aria-hidden='true' focusable='false' />,
+  };
 
   function handleThemeChange(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
@@ -18,11 +34,12 @@ export function Menu() {
   }
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
   return (
     <nav className={styles.menu} aria-label='Menu de navegação principal'>
-      <h1>{theme}</h1>
       <a
         className={styles.menuLink}
         href='#'
@@ -54,7 +71,7 @@ export function Menu() {
         title='Alternar Tema'
         onClick={handleThemeChange}
       >
-        <SunIcon aria-hidden='true' focusable='false' />
+        {nextThemeIcon[theme]}
       </a>
     </nav>
   );
